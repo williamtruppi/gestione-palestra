@@ -22,8 +22,8 @@ class LessonFactory extends Factory
         $course_id = Course::factory();
         $description = $this->faker->text();
         $max_capacity = $this->faker->numberBetween(5, 15);
-        $start_time = $this->faker->time();
-        $end_time = $start_time + 3600;
+        $start_time = $this->faker->dateTimeThisMonth();
+        $end_time = $start_time->modify('+1 hour');
 
         return [
             'course_id' => $course_id,
