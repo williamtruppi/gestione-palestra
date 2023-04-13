@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'gym', 'namespace' => 'App\Http\Controllers\Api'], function() {
+    Route::apiResource('customers', CustomerController::class);
+    Route::apiResource('courses', CourseController::class);
+    Route::apiResource('lessons', LessonController::class);
+});
