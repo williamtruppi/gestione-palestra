@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Customer;
+use App\Models\Card;
 use Illuminate\Database\Seeder;
 
-class CustomerSeeder extends Seeder
+class CardSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,8 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        Customer::factory()
+        /* Card::factory()
                 ->count(5)
-                //->hasCards(1)
-                ->create();
+                ->create(); */
     }
 }

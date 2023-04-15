@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use App\Http\Resources\CustomerResource;
+use App\Http\Resources\CustomerCollection;
+use Illuminate\Http\Request;
+
 // use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
@@ -14,19 +18,22 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Customer::all();
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $fltArr['email'] = $request->query('email') ?? '';
+        $fltArr['membership_type'] = $request->query('membership_type') ?? '';
+        $fltArr['membership_duration'] = $request->query('membership_duration') ?? '';
+        $fltArr['membership_status'] = $request->query('membership_status') ?? '';
+        $fltArr['membership_status'] = $request->query('membership_status') ?? '';
+        $fltArr['bookings'] = $request->query('bookings') ?? 0;
+
+        $fltArr['cards'] = $request->query('cards') ?? false;
+
+        $result = \App\Models\Customer::getCustomers($fltArr);
+
+        return new CustomerCollection($result);
+
     }
 
     /**
@@ -37,7 +44,7 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+        return new CustomerResource(Customer::create($request->all()));
     }
 
     /**
@@ -48,18 +55,15 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Customer $customer)
-    {
-        //
+        $fltArr['bookings'] = request()->query('bookings') ?? 0;
+
+        if ($fltArr['bookings']) {
+            return new CustomerResource($customer->loadMissing('bookings'));
+        }
+
+        return new CustomerResource($customer);
+
     }
 
     /**
@@ -71,7 +75,7 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        $customer->update($request->all());
     }
 
     /**

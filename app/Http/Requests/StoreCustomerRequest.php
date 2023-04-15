@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCustomerRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreCustomerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,22 @@ class StoreCustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'phone' => ['required'],
+            'card_id' => ['required'],
+            'membershipType' => ['required', Rule::in([1, 2, 3])],
+            'membershipDuration' => ['required', Rule::in([1, 3, 6, 12])],
+            'membershipStatus' => ['required', Rule::in([0, 1, 2, 4])]
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'membership_type' => $this->membershipType,
+            'membership_duration' => $this->membershipDuration,
+            'membership_status' => $this->membershipStatus
+        ]);
     }
 }

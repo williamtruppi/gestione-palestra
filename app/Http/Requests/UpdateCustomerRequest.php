@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCustomerRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateCustomerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,41 @@ class UpdateCustomerRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if ($method == 'PUT') {
+            
+            return [
+                'name' => ['required'],
+                'email' => ['required', 'email'],
+                'phone' => ['required'],
+                'card_id' => ['required'],
+                'membershipType' => ['required', Rule::in([1, 2, 3])],
+                'membershipDuration' => ['required', Rule::in([1, 3, 6, 12])],
+                'membershipStatus' => ['required', Rule::in([0, 1, 2, 4])]
+            ];
+
+        } else {
+
+            return [
+                'name' => ['sometimes', 'required'],
+                'email' => ['sometimes', 'required', 'email'],
+                'phone' => ['sometimes', 'required'],
+                'card_id' => ['sometimes', 'required'],
+                'membershipType' => ['sometimes', 'required', Rule::in([1, 2, 3])],
+                'membershipDuration' => ['sometimes', 'required', Rule::in([1, 3, 6, 12])],
+                'membershipStatus' => ['sometimes', 'required', Rule::in([0, 1, 2, 4])]
+            ];
+
+        }
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'membership_type' => $this->membershipType,
+            'membership_duration' => $this->membershipDuration,
+            'membership_status' => $this->membershipStatus
+        ]);
     }
 }
