@@ -9,12 +9,14 @@ class Booking extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['customer_id', 'lesson_id'];
+
     public function customer() {
         return $this->belongsTo(Customer::class);
     }
 
     public function lessons() {
-        return $this->hasMany(Lesson::class);
+        return $this->belongsTo(Lesson::class);
     }
 
 }

@@ -18,7 +18,7 @@ class BookingPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true; // tutti gli utenti possono visualizzare le prenotazioni
     }
 
     /**
@@ -30,7 +30,7 @@ class BookingPolicy
      */
     public function view(User $user, Booking $booking)
     {
-        //
+        return true; // tutti gli utenti possono visualizzare le prenotazioni
     }
 
     /**
@@ -41,7 +41,7 @@ class BookingPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->tokenCan('basic') || $user->tokenCan('admin');
     }
 
     /**
@@ -53,7 +53,7 @@ class BookingPolicy
      */
     public function update(User $user, Booking $booking)
     {
-        //
+        return $user->tokenCan('basic') || $user->tokenCan('admin'); // l'utente "basic" e l'utente "admin" possono aggiornare prenotazioni
     }
 
     /**
@@ -65,7 +65,7 @@ class BookingPolicy
      */
     public function delete(User $user, Booking $booking)
     {
-        //
+        return $user->tokenCan('admin'); // solo l'utente "admin" può eliminare prenotazioni
     }
 
     /**

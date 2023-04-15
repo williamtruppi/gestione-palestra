@@ -13,7 +13,7 @@ class StoreBookingRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class StoreBookingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'customerId' => ['required'],
+            'lessonId' => ['required'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'customer_id' => $this->customerId,
+            'lesson_id' => $this->lessonId
+        ]);
     }
 }

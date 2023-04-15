@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Customer extends Model
 {
@@ -51,7 +50,7 @@ class Customer extends Model
     }
 
     public function card() {
-        return $this->belongsTo(Card::class);
+        return $this->belongsTo(Card::class, 'card_id');
     }
 
     public function bookings() {

@@ -22,4 +22,6 @@ Route::group(['prefix' => 'gym', 'namespace' => 'App\Http\Controllers\Api', 'mid
     Route::apiResource('customers', CustomerController::class);
     Route::apiResource('courses', CourseController::class);
     Route::apiResource('lessons', LessonController::class);
+    Route::apiResource('cards', CardController::class);
+    Route::apiResource('bookings', BookingController::class);
 });
