@@ -25,7 +25,8 @@ class CustomerFactory extends Factory
         $card_id = Card::factory();
         $type = $this->faker->randomElement([1, 2, 3]);
         $duration = $this->faker->randomElement([1, 3, 6, 12]);
-        $status = $this->faker->randomElement([0, 1, 2, 4]);
+        $status = $this->faker->randomElement([0, 1, 2, 3, 4]); 
+        // 0 - non attivo, 1 - attivo, 2 - scaduto, 3 - sospeso, 4 - decaduto
 
         return [
             'name' => $name,
