@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\CheckCustomerAbbonamenti;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
@@ -10,7 +11,6 @@ use App\Http\Resources\CustomerCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ExampleMail;
-
 // use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
@@ -35,12 +35,11 @@ class CustomerController extends Controller
         $result = \App\Models\Customer::getCustomers($fltArr);
 
         return new CustomerCollection($result);
-
     }
 
-    public function CheckAbbonamenti()
+    public function CheckAbbonamenti(CheckCustomerAbbonamenti $request)
     {
-        
+
         $msgJson = [];
 
         $customers = Customer::whereIn('membership_status', [1, 2])->get();
@@ -49,7 +48,7 @@ class CustomerController extends Controller
 
             $dateExipMemb = date('Y-m-d H:i:s', strtotime($v->updated_at . " + $v->membership_duration month"));;
             $currDateTime = date('Y-m-d H:i:s');
-            
+
             if ($dateExipMemb < $currDateTime || $v->membership_status == 2) { // se l'abbonamento è scaduto
 
                 try {
@@ -62,25 +61,24 @@ class CustomerController extends Controller
 
                 $subject = 'Avviso Abbonamento Scaduto';
                 $message =  'Ti ricordiamo che il tuo abbonamento risulta scaduto. Procedi a rinnovarlo tramite l\'app o direttamente
-                da noi in palestra. Qualora non fossi più interessato, comunicaci la tua volontà di interrompere la tua sottoscrizione';
-                
+            da noi in palestra. Qualora non fossi più interessato, comunicaci la tua volontà di interrompere la tua sottoscrizione';
+
                 try {
                     Mail::to($v->email)->send(new ExampleMail($v->name, $message, $subject));
                     $msgJson[] = $v->name . ' - email inviata';
                 } catch (\Throwable $th) {
                     return response()->json(['message' => 'Errore nell\'invio della mail.']);
                 }
-            
             } elseif ($v->membership_status == 1) {
-                
+
                 $diff = strtotime($dateExipMemb) - strtotime($currDateTime);
                 $days = round($diff / (60 * 60 * 24));
 
                 if ($days > 0 && $days <= 15) {
                     $subject = 'Avviso Abbonamento in Scadenza';
                     $message =  'Ti ricordiamo che il tuo abbonamento scadrà tra 15. Procedi a rinnovarlo tramite l\'app o direttamente
-                    da noi in palestra. Qualora non fossi più interessato, comunicaci la tua volontà di interrompere la tua sottoscrizione';                
-                    
+                da noi in palestra. Qualora non fossi più interessato, comunicaci la tua volontà di interrompere la tua sottoscrizione';
+
                     try {
                         Mail::to($v->email)->send(new ExampleMail($v->name, $message, $subject));
                         $msgJson[] = $v->name . ' - email inviata';
@@ -88,13 +86,8 @@ class CustomerController extends Controller
                         return response()->json(['message' => 'Errore nell\'invio della mail.']);
                     }
                 }
-
             }
-
-            
-
-
-        } 
+        }
 
         return response()->json(['message' => $msgJson]);
 
@@ -128,7 +121,6 @@ class CustomerController extends Controller
         }
 
         return new CustomerResource($customer);
-
     }
 
     /**

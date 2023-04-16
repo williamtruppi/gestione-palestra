@@ -28,7 +28,7 @@ Route::group(['prefix' => 'gym', 'namespace' => 'App\Http\Controllers\Api', 'mid
         Route::patch('/{id}', 'CustomerController@update');
         Route::delete('/{id}', 'CustomerController@destroy');
     });
-    Route::apiResource('courses', CourseController::class, );
+    Route::apiResource('courses', CourseController::class);
     Route::apiResource('lessons', LessonController::class);
     Route::apiResource('cards', CardController::class);
     Route::apiResource('bookings', BookingController::class);

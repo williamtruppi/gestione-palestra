@@ -40,9 +40,9 @@ Route::get('/setup', function() {
             
             $user = Auth::user();
 
-            $adminToken = $user->createToken('admin-token', ['create', 'update', 'delete']);
+            $adminToken = $user->createToken('admin-token', ['all']);
             $updateToken = $user->createToken('update-token', ['create', 'update']);
-            $basicToken = $user->createToken('basic-token', ['create', 'update']);
+            $basicToken = $user->createToken('basic-token', ['booking:create', 'booking:update']);
 
             return [
                 'admin' => $adminToken->plainTextToken,
