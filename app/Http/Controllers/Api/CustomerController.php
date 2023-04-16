@@ -65,15 +65,15 @@ class CustomerController extends Controller
                 da noi in palestra. Qualora non fossi più interessato, comunicaci la tua volontà di interrompere la tua sottoscrizione';
                 
                 try {
-                    // Mail::to($v->email)->send(new ExampleMail($v->name, $message, $subject));
-                    $msgJson[] = $v->name . '- email inviata';
+                    Mail::to($v->email)->send(new ExampleMail($v->name, $message, $subject));
+                    $msgJson[] = $v->name . ' - email inviata';
                 } catch (\Throwable $th) {
                     return response()->json(['message' => 'Errore nell\'invio della mail.']);
                 }
             
             } elseif ($v->membership_status == 1) {
                 
-                $diff = strtotime($currDateTime) - strtotime($dateExipMemb);
+                $diff = strtotime($dateExipMemb) - strtotime($currDateTime);
                 $days = round($diff / (60 * 60 * 24));
 
                 if ($days > 0 && $days <= 15) {
@@ -82,8 +82,8 @@ class CustomerController extends Controller
                     da noi in palestra. Qualora non fossi più interessato, comunicaci la tua volontà di interrompere la tua sottoscrizione';                
                     
                     try {
-                        //Mail::to($v->email)->send(new ExampleMail($v->name, $message, $subject));
-                        $msgJson[] = $v->name . '- email inviata';
+                        Mail::to($v->email)->send(new ExampleMail($v->name, $message, $subject));
+                        $msgJson[] = $v->name . ' - email inviata';
                     } catch (\Throwable $th) {
                         return response()->json(['message' => 'Errore nell\'invio della mail.']);
                     }
