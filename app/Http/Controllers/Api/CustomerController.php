@@ -27,7 +27,6 @@ class CustomerController extends Controller
         $fltArr['membership_type'] = $request->query('membership_type') ?? '';
         $fltArr['membership_duration'] = $request->query('membership_duration') ?? '';
         $fltArr['membership_status'] = $request->query('membership_status') ?? '';
-        $fltArr['membership_status'] = $request->query('membership_status') ?? '';
         $fltArr['bookings'] = $request->query('bookings') ?? 0;
 
         $fltArr['cards'] = $request->query('cards') ?? false;
