@@ -17,7 +17,7 @@ class UpdateCustomerRequest extends FormRequest
         
         $user = $this->user();
 
-        return $user != null && $user->tokenCan('update');
+        return $user != null && $user->tokenCan('all');
 
     }
 
@@ -51,7 +51,7 @@ class UpdateCustomerRequest extends FormRequest
                 'card_id' => ['sometimes', 'required'],
                 'membershipType' => ['sometimes', 'required', Rule::in([1, 2, 3])],
                 'membershipDuration' => ['sometimes', 'required', Rule::in([1, 3, 6, 12])],
-                'membershipStatus' => ['sometimes', 'required', Rule::in([0, 1, 2, 4])]
+                'membershipStatus' => ['sometimes', 'required', Rule::in([0, 1, 2, 3, 4])]
             ];
 
         }
