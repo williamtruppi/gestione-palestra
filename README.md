@@ -47,20 +47,30 @@ Restituisce la lista dei clienti registrati nell'applicazione.
 
 
 #### Esempio di risposta
-
+`http://127.0.0.1:8000/api/gym/customers?membership_duration=3&membership_type=3`
 ```json
 {
     "data": [
         {
-            "id": 1,
-            "name": "Kimberly Ullrich",
-            "email": "durward48@lakin.com",
-            "phone": "1-601-209-8509",
-            "membershipType": 2,
+            "id": 5,
+            "name": "Lane King",
+            "email": "zschmidt@barrows.com",
+            "phone": "+1.820.503.6679",
+            "membershipType": 3,
+            "membershipDuration": 3,
+            "membershipStatus": 3,
+            "cardCode": "325553619"
+        },
+        {
+            "id": 7,
+            "name": "Armand Monahan",
+            "email": "eleannon@runte.com",
+            "phone": "1-434-781-7436",
+            "membershipType": 3,
             "membershipDuration": 3,
             "membershipStatus": 4,
-            "cardCode": "6619677"
-        },
+            "cardCode": "114753877"
+        }
     ]
 }
 ```
