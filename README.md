@@ -27,8 +27,8 @@ GESTIONE PALESTRA
 3. Creare il file `.env` (utilizzando `.env.example` come riferimento) e configurare le variabili d'ambiente come necessario
 4. Creare il database con il comando `php artisan migrate`
 5. Avviare il server con il comando `php artisan serve`
-6. Eseguire php artisan db:seed per popolare il database con i dati di prova (opzionale)
-7. Eseguire php artisan serve per avviare il server di sviluppo
+6. Eseguire `php artisan db:seed` per popolare il database con i dati di prova.
+7. Eseguire `php artisan serve` per avviare il server di sviluppo
 
 ## Utilizzo
 
