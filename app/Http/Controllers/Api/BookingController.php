@@ -46,16 +46,6 @@ class BookingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreBookingRequest  $request
@@ -116,17 +106,6 @@ class BookingController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Booking $booking)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateBookingRequest  $request
@@ -135,7 +114,12 @@ class BookingController extends Controller
      */
     public function update(UpdateBookingRequest $request, Booking $booking)
     {
-        //
+        try {
+            $booking->update($request->all());
+            return response()->json(['message' => 'La tua prenotazione è stata correttamente modificata.' ]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Errore nella modifica della prenotazione.' ]);
+        }
     }
 
     /**
@@ -146,6 +130,11 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
-        //
+        try {
+            $booking->delete();
+            return response()->json(['message' => 'La tua prenotazione è stata correttamente cancellata.' ]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Errore nella cancellazione della prenotazione' ]);
+        }
     }
 }

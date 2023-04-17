@@ -13,7 +13,11 @@ class UpdateBookingRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        
+        $user = $this->user();
+
+        return $user != null && $user->tokenCan('booking:update');
+
     }
 
     /**
@@ -23,8 +27,30 @@ class UpdateBookingRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if ($method == 'PUT') {
+            
+            return [
+                'customerId' => ['required'],
+                'lessonId' => ['required']
+            ];
+
+        } else {
+
+            return [
+                // 'customerId' => ['sometimes', 'required'],
+                'lessonId' => ['sometimes', 'required']
+            ];
+
+        }
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            // 'customer_id' => $this->customerId,
+            'lesson_id' => $this->lessonId
+        ]);
     }
 }
