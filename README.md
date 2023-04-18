@@ -99,10 +99,8 @@ Api di inserimento della prenotazione. Viene effettuato un controllo in primis s
 #### Esempio di invio
 ```json
 {
-    {
-        "customer_id": 5,
-        "lesson_id": 4
-    }
+    "customer_id": 5,
+    "lesson_id": 4
 }
 ```
 
