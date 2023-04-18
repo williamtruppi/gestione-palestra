@@ -45,7 +45,6 @@ Restituisce la lista dei clienti registrati nell'applicazione.
 - `membership_duration` (opzionale): restituisce gli abbonamenti con una certa durata (1- Mensile, 3 - Trimestrale, 6 - Semestrale, 12 - Annuale).
 - `membership_status` (opzionale): restituisce gli abbonamenti con un determinato status (0 - Non attivo, 1- Attivo, 2 - Scaduto, 3 - Sospeso, 4 - Interrotto).
 
-
 #### Esempio di risposta
 `http://127.0.0.1:8000/api/gym/customers?membership_duration=3&membership_type=3`
 ```json
@@ -96,6 +95,16 @@ Api di inserimento della prenotazione. Viene effettuato un controllo in primis s
 
 - `customer_id`: id del cliente.
 - `lesson_id` : id della lezione.
+
+#### Esempio di invio
+```json
+{
+    {
+        "customer_id": 5,
+        "lesson_id": 4
+    }
+}
+```
 
 #### Esempio di risposta
 
