@@ -74,6 +74,15 @@ Restituisce la lista dei clienti registrati nell'applicazione.
     ]
 }
 ```
+### GET /api/gym/customers/checkabbonamenti
+
+Effettua un controllo su tutti i clienti presenti e:
+- se l'utente ha l'abbonamento scaduto, è previsto l'invio di una mail volta a ricordarglielo o a interrompere l'abbonamento qualora non fosse più richiesto.
+- se l'utente ha l'abbonamento in scadenza, è previsto l'invio di una mail volta a ricordarglielo.
+
+#### Parametri
+
+Nessun parametro previsto.
 
 ## Licenza
 
