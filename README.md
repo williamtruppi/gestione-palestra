@@ -77,12 +77,29 @@ Restituisce la lista dei clienti registrati nell'applicazione.
 ### GET /api/gym/customers/checkabbonamenti
 
 Effettua un controllo su tutti i clienti presenti e:
-- se l'utente ha l'abbonamento scaduto, è previsto l'invio di una mail volta a ricordarglielo o a interrompere l'abbonamento qualora non fosse più richiesto.
+- se l'utente ha l'abbonamento scaduto, è previsto l'invio di una mail volta a ricordarglielo o a interrompere lo stesso qualora non fosse più richiesto.
 - se l'utente ha l'abbonamento in scadenza, è previsto l'invio di una mail volta a ricordarglielo.
 
 #### Parametri
 
 Nessun parametro previsto.
+
+#### Esempio di risposta
+
+Messaggio di avvenuto invio con le relative anagrafiche.
+
+### POST /api/gym/bookings
+
+Api di inserimento della prenotazione. Viene effettuato un controllo in primis sulla validità dell'abbonamento del cliente e successivamente sulla capienza massima raggiunta per la lezione scelta.
+
+#### Parametri
+
+- `customer_id`: id del cliente.
+- `lesson_id` : id della lezione.
+
+#### Esempio di risposta
+
+Messaggio di avvenuta conferma, o meno, della prenotazione.
 
 ## Licenza
 
