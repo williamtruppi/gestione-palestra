@@ -31,7 +31,8 @@ GESTIONE PALESTRA
 
 ## API
 
-L'applicazione espone le seguenti API:
+Accedere a `/setup` per poter recuperare il bearer token necessario per l'accesso all'API.
+Di seguito le API esposte:
 
 ### GET /api/gym/customers
 
