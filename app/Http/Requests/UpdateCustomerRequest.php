@@ -37,6 +37,7 @@ class UpdateCustomerRequest extends FormRequest
                 'email' => ['required', 'email'],
                 'phone' => ['required'],
                 'card_id' => ['required'],
+                'membershipDate' => ['required'],
                 'membershipType' => ['required', Rule::in([1, 2, 3])],
                 'membershipDuration' => ['required', Rule::in([1, 3, 6, 12])],
                 'membershipStatus' => ['required', Rule::in([0, 1, 2, 4])]
@@ -49,6 +50,7 @@ class UpdateCustomerRequest extends FormRequest
                 'email' => ['sometimes', 'required', 'email'],
                 'phone' => ['sometimes', 'required'],
                 'card_id' => ['sometimes', 'required'],
+                'membershipDate' => ['sometimes', 'required'],
                 'membershipType' => ['sometimes', 'required', Rule::in([1, 2, 3])],
                 'membershipDuration' => ['sometimes', 'required', Rule::in([1, 3, 6, 12])],
                 'membershipStatus' => ['sometimes', 'required', Rule::in([0, 1, 2, 3, 4])]
@@ -60,6 +62,7 @@ class UpdateCustomerRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
+            'membership_date' => date('Y-m-d', strtotime($this->membershipDate)),
             'membership_type' => $this->membershipType,
             'membership_duration' => $this->membershipDuration,
             'membership_status' => $this->membershipStatus

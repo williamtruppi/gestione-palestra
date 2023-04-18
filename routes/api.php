@@ -24,7 +24,7 @@ Route::group(['prefix' => 'gym', 'namespace' => 'App\Http\Controllers\Api', 'mid
         Route::get('/checkabbonamenti', 'CustomerController@CheckAbbonamenti');
         Route::get('/{id}', 'CustomerController@show');
         Route::post('/store', 'CustomerController@store');
-        // Route::put('/{id}/update', 'CustomerController@update');
+        Route::put('/update/{id}', 'CustomerController@update');
         Route::patch('/update/{id}', 'CustomerController@update');
         Route::delete('/{id}', 'CustomerController@destroy');
     });

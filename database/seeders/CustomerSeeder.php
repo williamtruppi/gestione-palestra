@@ -16,7 +16,7 @@ class CustomerSeeder extends Seeder
     {
         Customer::factory()
                 ->count(5)
-                //->hasCards(1)
+                ->hasBookings(1)
                 ->create();
     }
 }

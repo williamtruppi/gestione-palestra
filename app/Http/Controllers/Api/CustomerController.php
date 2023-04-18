@@ -45,7 +45,7 @@ class CustomerController extends Controller
 
         foreach ($customers as $k => $v) {
 
-            $dateExipMemb = date('Y-m-d H:i:s', strtotime($v->updated_at . " + $v->membership_duration month"));;
+            $dateExipMemb = date('Y-m-d H:i:s', strtotime($v->membership_date . " + $v->membership_duration month"));;
             $currDateTime = date('Y-m-d H:i:s');
 
             if ($dateExipMemb < $currDateTime || $v->membership_status == 2) { // se l'abbonamento è scaduto

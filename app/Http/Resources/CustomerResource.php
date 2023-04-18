@@ -20,6 +20,7 @@ class CustomerResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
+            'membershipDate' => $this->membership_date,
             'membershipType' => $this->membership_type,
             'membershipDuration' => $this->membership_duration,
             'membershipStatus' => $this->membership_status,
