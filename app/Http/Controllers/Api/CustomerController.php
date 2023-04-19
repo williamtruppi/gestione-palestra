@@ -114,13 +114,17 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
 
-        $fltArr['bookings'] = request()->query('bookings') ?? 0;
-
-        if ($fltArr['bookings']) {
-            return new CustomerResource($customer->loadMissing('bookings'));
+        try {
+            $fltArr['bookings'] = request()->query('bookings') ?? 0;
+    
+            if ($fltArr['bookings']) {
+                return new CustomerResource($customer->loadMissing('bookings'));
+            }
+    
+            return new CustomerResource($customer);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Errore durante il recupero del cliente'], 500);
         }
-
-        return new CustomerResource($customer);
     }
 
     /**

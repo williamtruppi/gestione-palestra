@@ -22,11 +22,11 @@ Route::group(['prefix' => 'gym', 'namespace' => 'App\Http\Controllers\Api', 'mid
     Route::group(['prefix' => 'customers'], function() {
         Route::get('/', 'CustomerController@index');
         Route::get('/checkabbonamenti', 'CustomerController@CheckAbbonamenti');
-        Route::get('/{id}', 'CustomerController@show');
         Route::post('/store', 'CustomerController@store');
-        Route::put('/update/{id}', 'CustomerController@update');
-        Route::patch('/update/{id}', 'CustomerController@update');
-        Route::delete('/{id}', 'CustomerController@destroy');
+        Route::put('/update/{customer}', 'CustomerController@update');
+        Route::patch('/update/{customer}', 'CustomerController@update');
+        Route::get('/{customer}', 'CustomerController@show');
+        Route::delete('/{customer}', 'CustomerController@destroy');
     });
     Route::apiResource('courses', CourseController::class);
     Route::apiResource('lessons', LessonController::class);

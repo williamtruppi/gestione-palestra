@@ -15,6 +15,7 @@ class Customer extends Model
         'email',
         'phone',
         'card_id',
+        'membership_date',
         'membership_type',
         'membership_duration',
         'membership_status'
