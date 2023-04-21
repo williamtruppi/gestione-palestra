@@ -90,7 +90,8 @@ class BookingController extends Controller
             $subject = 'Conferma Prenotazione Corso - ' . $course->name;
             $message =  'La tua prenotazione per la lezione è andata a buon fine. Buon allenamento! ';
             Mail::to($user->email)->send(new ExampleMail($user->name, $message, $subject));
-            return new BookingResource($booking);
+            //return new BookingResource($booking);
+            return response()->json(['message' => $message . 'A breve riceverai una mail di conferma' ]);
 
         }
     }
