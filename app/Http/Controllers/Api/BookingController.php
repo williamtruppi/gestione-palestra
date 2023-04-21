@@ -68,10 +68,9 @@ class BookingController extends Controller
 
         // controllo sul raggiungimento della capacità massima
         if ($count == $lesson->max_capacity) {
-
             $otherCourses = Lesson::where('id', '<>', $lessonId)
                     ->where('course_id', $lesson->course_id)
-                    ->whereRaw("DATE(start_time) = DATE(NOW())")
+                    ->whereRaw("DATE(start_time) = DATE('{$lesson->start_time}')")
                     ->get();
 
             return response()->json([
